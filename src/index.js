@@ -15,11 +15,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (name, image) => {
   fetchToys();
-  submitToy();
+  submitToy(name, image);
+  likes();
 });
 
+
+function likes() {
+  const likeButtons = querySelectorAll(".like-btn");
+  for (let i=0; i<likeButtons.length; i++) {
+    if (likeButtons[i] === document.querySelector('.like-btn').addEventListener('click', function(e))) {
+      somthing???.likes += 1
+  }
+};
+
+// patch request
+let configObj0 = {
+  method: 'PATCH',
+ http://localhost:3000/toys/:id
+headers: 
+{
+  "Content-Type": "application/json",
+  'Accept': "application/json"
+}
+ 
+body: JSON.stringify({
+  "likes": <new number>
+})
+}
+
+// prevent default needed?
 function submitToy(name, image) {
   let formData = {
     name: name,
@@ -41,7 +67,7 @@ function submitToy(name, image) {
     return response.json();
   })
   .then(function(object) {
-      debugger
+      
     console.log(object);
   }); 
 };
