@@ -71,9 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then(function(object) { 
-         console.log(object);
-      })
-      .then(renderToy(name, image))
+        //  console.log(object);
+        renderToy(name, image, object)
+      }) 
+      // .then(renderToy(name, image, json))
       .then(toggleNewFormButton())
       .then(clearNewToyForm())      
     })
@@ -96,31 +97,31 @@ function clearNewToyForm() {
   }
 }
 
-function submitToy(name, image) {
-  let formData = {
-    name: name,
-    image: image
-  };
+// function submitToy(name, image) {
+//   let formData = {
+//     name: name,
+//     image: image
+//   };
   
-  let configObj = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify(formData)
-    }.then(fetchToys()); 
+//   let configObj = {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify(formData)
+//     }.then(fetchToys()); 
   
 
-  return fetch(toysUrl, configObj)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(object) {
+//   return fetch(toysUrl, configObj)
+//   .then(function(response) {
+//     return response.json();
+//   })
+//   .then(function(object) {
       
-    console.log(object);
-  })
-};
+//     console.log(object);
+//   })
+// };
 
 
 function fetchToys() {
@@ -156,7 +157,7 @@ function renderToys(json) {
   })
 }
 
-function renderToy(name, imgUrl) {
+function renderToy(name, imgUrl, object) {
   const toyDivId = document.querySelector('#toy-collection')
   const divToAdd = document.createElement('div');
   divToAdd.classList.add("card");
@@ -175,7 +176,7 @@ function renderToy(name, imgUrl) {
   button.classList.add('like-btn')
   button.innerText = 'Like'
   button.addEventListener('click', increaseLikes)
-  // button.dataset.id = id
+  button.dataset.id = object.id
   divToAdd.appendChild(button)
 }
 
