@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createToy(toyObj) {
     //Create new div with class 'card'
+    //debugger
+
     let newDiv = document.createElement('div');
     newDiv.className = 'card';
     toyCollection.appendChild(newDiv);
@@ -54,8 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let likeButton = document.createElement('button');
     likeButton.class = 'like-btn';
     likeButton.innerText = "Like <3";
+    likeButton.id = toyObj["id"];
     newDiv.appendChild(likeButton);
     likeButton.addEventListener('click', updateLikes);
+    //likeButton.id = x;
   }//function createToy
 
   //When submit button of form with class 'add-toy-form' is clicked (or when that form is submitted...)
@@ -94,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateLikes(event) {
     event.preventDefault();
     console.log(event);
+    
     //let toyId = //Need to figure out this id and replace it with 1 in the fetch URL!!
     //Each time a card is created, attach an id to it (from the server)??
 
@@ -110,11 +115,12 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(formData)
     };
 
-    return fetch("http://localhost:3000/toys/1", configObj).then(function(response) {
+    return fetch(`http://localhost:3000/toys/${event.target.id}`, configObj).then(function(response) {
       return response.json();
     })
     .then(function(object) {
       //console.log(object["likes"]);
+      debugger 
       event.target.parentElement.getElementsByClassName('num-likes')[0].innerText = `${object["likes"]} likes`;
     })
 
