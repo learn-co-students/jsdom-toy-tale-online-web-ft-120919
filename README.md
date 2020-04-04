@@ -5,7 +5,7 @@ Help Andy recover their toys and get the toys back in the toy collection.
 
 ## Create Your Server
 
-All of the toy data is stored in the `db.json` file. You'll want to access this
+All of the toy data is stored in the `db.json` file. You'll want to access this  
 data using a JSON server. In order to do this, run the following two commands:
 
    * `npm install -g json-server`
